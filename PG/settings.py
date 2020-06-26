@@ -171,6 +171,6 @@ from decouple import config
 EMAIL_HOST = 'smtp.googlemail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'vargastudelaoscar@gmail.com'
-EMAIL_HOST_PASSWORD = 'Vargastudela94'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
 
