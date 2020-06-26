@@ -1,0 +1,232 @@
+{% load static %}
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Newline CSS Template with a video background</title>
+<!--
+Newline Template
+http://www.templatemo.com/tm-503-newline
+-->
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="{% static 'css11/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css11/bootstrap-theme.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css11/fontAwesome.css' %}">
+        <link rel="stylesheet" href="{% static 'css11/templatemo-style.css' %}">
+
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+        <script src="{% static 'js11/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+    </head>
+    <body>
+
+        <div class="overlay"></div>
+        <section class="top-part">
+          <video controls autoplay loop>
+            <source src="{% static 'videos11/video.mp4' %}" type="video/mp4">
+            <source src="{% static 'videos11/video.ogg' %}" type="video/ogg">
+          Your browser does not support the video tag.
+          </video>
+        </section>
+
+        <section class="cd-hero">
+
+          <div class="cd-slider-nav">
+            <nav>
+              <span class="cd-marker item-1"></span>
+              <ul>
+                <li {% if docente.estado == 'PARA REVISAR' %} class="selected" {% endif %}><a href="#0"><div class="image-icon"><img src="{% static 'img11/home-icon.png' %}"></div><h6>Envio</h6></a></li>
+                <li><a href="#0"><div class="image-icon"><img src="{% static 'img11/flecha.jpg' %}"></div><h6></h6></a></li>
+                <li><a href="#0"><div class="image-icon"><img src="{% static 'img11/revision.png' %}"></div><h6>Revisión</h6></a></li>
+                <li><a href="#0"><div class="image-icon"><img src="{% static 'img11/flecha.jpg' %}"></div><h6></h6></a></li>
+                <li {% if docente.estado == 'APROBADO PARCIALMENTE' %} class="selected" {% endif %}><a href="#0"><div class="image-icon"><img src="{% static 'img11/lupa.png' %}"></div><h6>Parcialmente</h6></a></li>
+                <li><a href="#0"><div class="image-icon"><img src="{% static 'img11/flecha.jpg' %}"></div><h6></h6></a></li>
+                <li {% if docente.estado == 'APROBADO FINANZAS' %} class="selected" {% endif %}><a href="#0"><div class="image-icon"><img src="{% static 'img11/money.png' %}"></div><h6>Finanzas</h6></a></li>
+                <li><a href="#0"><div class="image-icon"><img src="{% static 'img11/flecha.jpg' %}"></div><h6></h6></a></li>
+                <li {% if docente.estado == 'APROBADO' %} class="selected" {% endif %}><a href="#0"><div class="image-icon"><img src="{% static 'img11/featured-icon.png' %}"></div><h6>Aprobado</h6></a></li>
+              </ul>
+            </nav>
+          </div> <!-- .cd-slider-nav -->
+
+          <ul class="cd-hero-slider">
+
+            <li {% if docente.estado == 'PARA REVISAR' %} class="selected" {% endif %}>
+              <div class="heading">
+                <h2 class="headingss">ENVIO DE DOCUMENTACIÓN</h2>
+
+              {% csrf_token %}
+                        <a href="index.html"><img src="/fotos/{{ docente.imagen }}" height="150" width="150" alt=""></a>
+                        <h3 class="headingss">{{ docente.nombre }} {{ docente.apellidos }}</h3>
+                          <h2 class="headingss">Documentación enviada el: {{docente.fecha_envio}}</h2>
+                          <h2 class="headingss">Programa: {{docente.id_programas}}</h2>
+                          <h4 class="headingss">Fuerza:</h4>
+                            {% if docente.fuerza == "CÍVIL" %}
+                            <h4 class="headingss"> {{docente.fuerza}}
+                                <a href="index.html"><img src="{% static 'assets/img/civil.jpg' %}" alt=""></a>
+                            {% endif %}
+                            {% if docente.fuerza == "EJÉRCITO" %}
+                            <h1> <strong>Ejército</strong>
+                                <a href="index.html"><img src="{% static 'assets/img/ejercito.jpg' %}" alt=""></a>
+                            {% endif %}
+                                {% if docente.fuerza == "FUERZA AÉREA" %}
+                            <h1> <strong>FUERZA AÉREA</strong>
+                                <a href="index.html"><img src="{% static 'assets/img/fab.jpg' %}" alt=""></a>
+                            {% endif %}
+                            {% if docente.fuerza == "ARMADA" %}
+                            <h1 class="green-text"> {{docente.fuerza}}
+                                <a href="index.html"><img src="{% static 'assets/img/armada.jpg' %}" alt=""></a> </h1>
+                            {% endif %}
+            </li>
+
+            <li>
+              <div class="heading">
+                <h1>TRANSICIÓN</h1>
+              </div>
+            </li>
+
+            <li>
+              {% if docente.estado == 'PARA REVISAR' %} class="selected"
+              <h1 class="headingss">Aún no se revisaron sus documentos</h1>
+              {% else %}
+              <div class="heading">
+                <h2 class="headingss">REVISIÓN DE DOCUMENTACIÓN</h2>
+                        <a href="index.html"><img src="/fotos/{{ docente.imagen }}" height="150" width="150" alt=""></a>
+                        <h3 class="headingss">{{ docente.nombre }} {{ docente.apellidos }}</h3>
+                          <h2 class="headingss">Documentos revisados el: {{docente.fecha_revision}}</h2>
+                          <h2 class="headingss">Documentos revisados por: {{docente.bitacora}}</h2>
+                          <h2 class="headingss">Programa: {{docente.id_programas}}</h2>
+
+              </div>
+              {% endif %}
+            </li>
+
+            <li>
+              <div class="heading">
+                <h1>TRANSICIÓN</h1>
+                <h1>{{ docente.nombre }} {{ docente.apellidos }}</h1>
+                        <h4>Documentación revisada por: {{ docente.bitacora }}</h4>
+                        <h4>El documento fue: {{ docente.estado }} en fecha: {{ docente.fecha_revision }}</h4>
+              </div>
+            </li>
+
+            <li {% if docente.estado == 'APROBADO PARCIALMENTE' %} class="selected">
+
+              <div class="heading">
+                <h2 class="headingss">APROBADO PARCIALMENTE</h2>
+                        <a href="index.html"><img src="/fotos/{{ docente.imagen }}" height="150" width="150" alt=""></a>
+                        <h3 class="headingss">{{ docente.nombre }} {{ docente.apellidos }}</h3>
+                          <h2 class="headingss">Documentos observados por: {{docente.bitacora}}</h2>
+                          <h2 class="headingss">Los observaciones son: {{docente.documento_observado}}</h2>
+
+              </div>
+              {% endif %}
+            </li>
+
+            <li>
+              <div class="heading">
+                <h1>TRANSICIÓN</h1>
+              </div>
+            </li>
+
+                              <li {% if docente.estado == 'APROBADO FINANZAS' %} class="selected" {% endif %}>
+              <div class="heading">
+                <h2 class="headingss">FINANZAS</h2>
+                        <a href="index.html"><img src="/fotos/{{ docente.imagen }}" height="150" width="150" alt=""></a>
+                        <h3 class="headingss">{{ docente.nombre }} {{ docente.apellidos }}</h3>
+                {% if docente.estado == 'APROBADO' %}
+                <h2 class="headingss">Fecha de envio de comprobante: {{docente.fecha_envio_baucher}}</h2>
+                {% endif %}
+                          <h2 class="headingss">Comprobante de pago revisado por: {{docente.fecha_revision_finanzas}}</h2>
+                          <h2 class="headingss">Documentos revisados por: {{docente.bitacora_finanzas}}</h2>
+                          <h2 class="headingss">Programa: {{docente.id_programas}}</h2>
+              </div>
+            </li>
+
+
+
+
+
+            <li>
+              <div class="heading">
+                <h1>Our projects</h1>
+                <span>Here you can check our recent projects</span>
+              </div>
+              <div class="cd-half-width fourth-slide">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="content fourth-content">
+                        <div class="row">
+                          <div class="col-md-3 project-item">
+                            <a href="img/item-01.jpg" data-lightbox="image-1"><img src="img/project-item-01.jpg"></a>
+                          </div>
+                          <div class="col-md-3 project-item">
+                            <a href="img/item-02.jpg" data-lightbox="image-1"><img src="img/project-item-02.jpg"></a>
+                          </div>
+                          <div class="col-md-3 project-item">
+                            <a href="img/item-03.jpg" data-lightbox="image-1"><img src="img/project-item-03.jpg"></a>
+                          </div>
+                          <div class="col-md-3 project-item">
+                            <a href="img/item-04.jpg" data-lightbox="image-1"><img src="img/project-item-04.jpg"></a>
+                          </div>
+                          <div class="col-md-3 project-item">
+                            <a href="img/item-05.jpg" data-lightbox="image-1"><img src="img/project-item-05.jpg"></a>
+                          </div>
+                          <div class="col-md-3 project-item">
+                            <a href="img/item-06.jpg" data-lightbox="image-1"><img src="img/project-item-06.jpg"></a>
+                          </div>
+                          <div class="col-md-3 project-item">
+                            <a href="img/item-07.jpg" data-lightbox="image-1"><img src="img/project-item-07.jpg"></a>
+                          </div>
+                          <div class="col-md-3 project-item">
+                            <a href="img/item-08.jpg" data-lightbox="image-1"><img src="img/project-item-08.jpg"></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li {% if docente.estado == 'APROBADO' %} class="selected" {% endif %}>
+              <div class="heading">
+                <h2 class="headingss">DOCUMENTACIÓN APROBADA COMPLETAMENTE</h2>
+                        <a href="index.html"><img src="/fotos/{{ docente.imagen }}" height="150" width="150" alt=""></a>
+                        <h3 class="headingss">{{ docente.nombre }} {{ docente.apellidos }}</h3>
+                           <h2 class="headingss">Documentos enviados el: {{docente.fecha_envio}}</h2>
+                          <h2 class="headingss">Documentos revisados el: {{docente.fecha_revision}}</h2>
+                          <h2 class="headingss">Documentos revisados por: {{docente.bitacora}}</h2>
+                          <h2 class="headingss">Comprobante revisado en fecha: {{docente.fecha_revision}}</h2>
+                          <h2 class="headingss">Comprobante de pago revisado por: {{docente.bitacora_finanzas}}</h2>
+                          <h2 class="headingss">Programa: {{docente.id_programas}}</h2>
+              </div>
+            </li>
+
+          </ul> <!-- .cd-hero-slider -->
+          </form>
+        </section> <!-- .cd-hero -->
+
+
+        <footer>
+          <p>Copyright &copy; 2017 Your Company
+
+        	| Designed by <em>TemplateMo</em></p>
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{% static 'js11/vendor/jquery-1.11.2.min.js' %}"><\/script>')</script>
+
+        <script src="{% static 'js11/vendor/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js11/plugins.js' %}"></script>
+        <script src="{% static 'js11/main.js' %}"></script>
+
+    </body>
+</html>

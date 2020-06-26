@@ -1,0 +1,65 @@
+{% extends 'index.html' %}
+
+{% block titulo %}
+  Biblioteca.dev | Listado de Autores
+{% endblock titulo %}
+
+{% block body %}
+
+  {% if cursantes %}
+      <div class="card">
+          <div class="card-header">
+              <strong class="card-title"><h1>Cantidad de varones:  {{ cursantes.count }}  </h1></strong>
+          </div>
+          <div class="table-stats order-table ov-h">
+              <table class="table">
+                  <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Opciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    {% for Cursante in cursantes %}
+                      <tr>
+                        <td>{{ Cursante.nombre}}</td>
+                        <td>{{ Cursante.tipo }}</td>
+                        <td>
+                            <a href="{% url 'consultarPrograma' Cursante.id %}" class="btn btn-success">Cursantes registrados</a>
+                            <a href="{% url 'editarPrograma' Cursante.id %}" class="btn btn-danger">Eliminar</a>
+                            <a href="{% url 'editarPrograma' Cursante.id %}" class="btn btn-warning">Editar Programa</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      {% else %}
+        <h1>No existen documentos internos para la secretaria</h1>
+      {% endif %}
+<div class="modal fade" id="creacion" role="dialog">
+
+</div>
+
+<div class="modal fade" id="edicion" role="dialog">
+
+</div>
+
+{% endblock body %}
+{% block extrajs %}
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  function abrir_modal_edicion(url) {
+    $('#edicion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+  function abrir_modal_creacion(url) {
+    $('#creacion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+</script>
+{% endblock extrajs %}

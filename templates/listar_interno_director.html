@@ -1,0 +1,94 @@
+
+
+
+
+{% extends 'index.html' %}
+
+{% block titulo %}
+  Biblioteca.dev | Listado de Autores
+{% endblock titulo %}
+
+{% block body %}
+<div>
+                                        {% if perms.docente.add_image %}
+                                        <a href="{% url 'listarDocInternosDirector' %}" class="btn btn-danger">Director</a>
+                                        {% endif %}
+                                        {% if perms.api.delete_file %}
+                                        <a href="{% url 'listarDocInternosCoordinador' %}" class="btn btn-success">Coordinador</a>
+                                        {% endif %}
+                                        {% if perms.docente.view_programas %}
+                                        <a href="{% url 'listarDocInternosEncargada' %}" class="btn btn-warning">Encargada de plataforma</a>
+                                        {% endif %}
+                                        {% if perms.docente.view_codigo %}
+                                        <a href="{% url 'listarDocInternosFacilitador' %}" class="btn btn-info">Facilitador de programas</a>
+                                        {% endif %}
+                                        {% if perms.docente.add_codigo %}
+                                        <a href="{% url 'listarDocInternosFinanzas' %}" class="btn btn-dark">Finanzas</a>
+                                        {% endif %}
+                                        {% if perms.api.add_docentes %}
+                                        <a href="{% url 'listarDocInternosSecretaria' %}" class="btn btn-primary">Secretaria</a>
+                                        {% endif %}
+</div>
+  {% if docentes %}
+      <div class="card">
+          <div class="card-header">
+              <strong class="card-title">Listado de documentación interna Director</strong>
+          </div>
+          <div class="table-stats order-table ov-h">
+              <table class="table">
+                  <thead>
+                      <tr>
+                        <th>IDs</th>
+                        <th>Detalles</th>
+                        <th>Opciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    {% for docente in docentes %}
+                      <tr>
+                        <td>{{ docente.nombre }}</td>
+                        <td>{{ docente.detalle }}</td>
+                          <td>{{ docente.estado }}</td>
+                        <td>
+
+                            <a href="{% url 'editarDocInterno' docente.id %}" class="btn btn-primary">Editar</a>
+                            <a href="{% url 'docente:eliminar_docente' docente.id %}" class="btn btn-danger">Eliminar</a>
+                            <a href="{% url 'consultar_Doc_interno' docente.id %}" class="btn btn-warning">Consulta</a>
+                            <a href="{% url 'consultarDocumentoInterno' docente.id %}" class="btn btn-info">Workflow</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      {% else %}
+        <h1>No existen autores registrados</h1>
+      {% endif %}
+<div class="modal fade" id="creacion" role="dialog">
+
+</div>
+
+<div class="modal fade" id="edicion" role="dialog">
+
+</div>
+
+{% endblock body %}
+{% block extrajs %}
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  function abrir_modal_edicion(url) {
+    $('#edicion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+  function abrir_modal_creacion(url) {
+    $('#creacion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+</script>
+{% endblock extrajs %}
+
+
+

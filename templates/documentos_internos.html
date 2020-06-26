@@ -1,0 +1,172 @@
+{% load static%}
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Lawyer HTML-5 Template</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="manifest" href="site.webmanifest">
+		<link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
+
+		<!-- CSS here -->
+            <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/slicknav.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/fontawesome-all.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
+   </head>
+
+   <body>
+
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="{% static 'assets/img/logo/psg.jpg' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <header>
+        <!-- Header Start -->
+       <div class="header-area header-sticky">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <!-- Logo -->
+                    <div class="col-xl-2 col-lg-1 col-md-1">
+                        <div class="logo">
+
+                        </div>
+                        <div><li><a href="#">Bienvenido, {{ user.username }}</a></li></div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3">
+                        <!-- Header-btn -->
+                        <div class="header-btn d-none d-lg-block f-right">
+                            <a href="{% url 'logout' %}" class="btn btn-danger">Cerrar Sesión</a>
+                        </div>
+                    </div>
+                    <!-- Mobile Menu -->
+                    <div class="col-12">
+                        <div class="mobile_menu d-block d-lg-none"></div>
+                    </div>
+                </div>
+            </div>
+       </div>
+        <!-- Header End -->
+
+        <!-- Team Mates Start -->
+        <div class="teams-area section-padding30">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-xl-12">
+                        <div class="section-tittle section-tittle-f text-center mb-70">
+                            <h2>Registro de documentos internos</h2>
+                        </div>
+                    </div>
+                </div>
+
+                        <form  role="form"  enctype="multipart/form-data" action="" method="POST" id="upload-image-form">
+                                {% csrf_token %}
+                                <div><strong>
+                                    <label>Nombre del documento:</label>
+                                    <div>
+                                    {{form.nombre}}
+                                    </div>
+                                    <label>Detalle del documento:</label>
+                                    <div>
+                                        {{form.detalle}}
+                                    </div>
+                                    <label>Archivo adjunto:</label>
+                                    <div>
+                                        {{form.documento}}
+                                    </div>
+                                    <label>Área destinataria de documento </label>
+                                    <div>
+                                        {{form.area}}
+                                    </div>
+                                    <label>Estado de la documentación :</label>
+                                    <div>
+                                        {{form.estado}}
+                                    </div>
+                                    </strong>
+                                </div>
+                            <div>
+                                <label><strong>Opciones de derivación</strong></label>
+                            </div>
+                            <button type="submit" class="btn btn-success">Registrar</button>
+
+                        </form>
+
+            </div>
+        </div>
+    </main>
+   <footer>
+       <div class="footer-bottom-area footer-bg">
+           <div class="container">
+               <div class="footer-border">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-xl-12">
+                            <div class="footer-copy-right text-center">
+                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+           </div>
+       </div>
+       <!-- Footer End-->
+   </footer>
+
+	<!-- JS here -->
+
+		<!-- All JS Custom Plugins Link Here here -->
+        <script src="{% static '' %}./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+		<!-- Jquery, Popper, Bootstrap -->
+        <script src="{% static '' %}./assets/js/popper.min.js"></script>
+        <script src="{% static '' %}./assets/js/bootstrap.min.js"></script>
+	    <!-- Jquery Mobile Menu -->
+        <script src="{% static '' %}./assets/js/jquery.slicknav.min.js"></script>
+
+		<!-- Jquery Slick , Owl-Carousel Plugins -->
+        <script src="{% static '' %}./assets/js/owl.carousel.min.js"></script>
+        <script src="{% static '' %}./assets/js/slick.min.js"></script>
+
+		<!-- One Page, Animated-HeadLin -->
+        <script src="{% static '' %}./assets/js/wow.min.js"></script>
+		<script src="{% static '' %}./assets/js/animated.headline.js"></script>
+        <script src="{% static '' %}./assets/js/jquery.magnific-popup.js"></script>
+
+		<!-- Scrollup, nice-select, sticky -->
+        <script src="{% static '' %}./assets/js/jquery.scrollUp.min.js"></script>
+        <script src="{% static '' %}./assets/js/jquery.nice-select.min.js"></script>
+		<script src="{% static '' %}./assets/js/jquery.sticky.js"></script>
+
+        <!-- counter , waypoint -->
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+        <script src="{% static '' %}./assets/js/jquery.counterup.min.js"></script>
+
+        <!-- counter -->
+        <script src="{% static '' %}./assets/js/contact.js"></script>
+        <script src="{% static '' %}./assets/js/jquery.form.js"></script>
+        <script src="{% static '' %}./assets/js/jquery.validate.min.js"></script>
+        <script src="{% static '' %}./assets/js/mail-script.js"></script>
+        <script src="{% static '' %}./assets/js/jquery.ajaxchimp.min.js"></script>
+
+		<!-- Jquery Plugins, main Jquery -->
+        <script src="{% static '' %}./assets/js/plugins.js"></script>
+        <script src="{% static '' %}./assets/js/main.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,84 @@
+{% extends 'index.html' %}
+
+{% block titulo %}
+  Biblioteca.dev | Listado de Autores
+{% endblock titulo %}
+
+{% block body %}
+  {% if cursantes %}
+      <div class="card">
+          <div class="card-header">
+              <strong class="card-title">Listado de cursantes con documetación aprobada <h1>Cantidad de cursantes:  {{ cursantes.count }}  </h1></strong>
+          </div>
+          <div class="table-stats order-table ov-h">
+              <table class="table">
+                  <thead>
+                      <tr>
+                        <th>nombres</th>
+                        <th>Apellidos</th>
+                          <th>Estado</th>
+                          <th>Imagen</th>
+                        <th>Opciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    {% for Cursante in cursantes %}
+                      <tr>
+                        <td>{{ Cursante.nombre}}</td>
+                        <td>{{ Cursante.apellidos}}</td>
+                        <td>{{ Cursante.estado}}</td>
+                        <td>
+                        {%if Cursante.imagen %}
+                            <img src="{{ Cursante.imagen.url}}" width="50" height="50">
+                        {% endif %}
+                        </td>
+
+
+
+                        <td>
+                            <a href="{% url 'editarCursante' Cursante.id %}" class="btn btn-primary">Editar</a>
+                            <a href="{% url 'docente:eliminar_docente' Cursante.id %}" class="btn btn-danger">Eliminar</a>
+                            <a href="{% url 'consultarDocumentoCursante' Cursante.id %}" class="btn btn-success">Revisar</a>
+                            <a href="{% url 'workflowCursante1' Cursante.id %}" class="btn btn-dark">Workflow</a>
+                            <a href="{% url 'consultarDocumentoBaucher' Cursante.id %}" class="btn btn-dark">Baucher</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      {% else %}
+        <h1>No existen cursantes registrados</h1>
+      {% endif %}
+<div class="modal fade" id="creacion" role="dialog">
+
+</div>
+
+<div class="modal fade" id="edicion" role="dialog">
+
+</div>
+
+{% endblock body %}
+{% block extrajs %}
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  function abrir_modal_edicion(url) {
+    $('#edicion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+  function abrir_modal_creacion(url) {
+    $('#creacion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+</script>
+{% endblock extrajs %}
+
+
+
+
+
+
+

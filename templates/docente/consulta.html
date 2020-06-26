@@ -1,0 +1,28 @@
+{% load static %}
+
+{% load django_qr_creator %}
+{% block titulo %}
+    Consulta de docentes
+{% endblock titulo %}
+{% block body %}
+<form method="POST">
+    {% csrf_token %}
+    <li><a href="#">Bienvenido, {{ user.username }}</a></li>
+    <h2>Nombre {{docente.nombre}} {{docente.apellidos}}</h2>
+    <h2>Sexo {{docente.sexo}} </h2>
+    <h2>Correo {{docente.correo}} </h2>
+    <h2>Nacionalidad: {{docente.nacionalidad}} </h2>
+    <h2>Estado "Activo" </h2>
+    <h2>Imagen {{docente.imagen}} </h2>
+    <h2>Fecha agregada {{docente.actual}} </h2>
+    <h2>Codigo de seguridad: {{docente.codigoS}} </h2>
+    {{ consulta_form.as_p }}
+    <td>{% qr email=docente.codigoS %}</td>
+    <button type="submit">Eliminar</button>
+    <a href="{% url 'docente:listar_docente' %}">Cancelar</a>
+    <!--<img src="{% static 'img/1.jpg' %}" class="img-fluid">
+    <img src="{% static 'img/2.jpg' %}" class="img-fluid">
+    <img src="{% static 'img/3.jpg' %}" class="img-fluid">-->
+</form>
+
+{% endblock body %}

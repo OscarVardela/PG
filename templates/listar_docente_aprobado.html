@@ -1,0 +1,85 @@
+{% extends 'index.html' %}
+
+{% block titulo %}
+  Biblioteca.dev | Listado de Autores
+{% endblock titulo %}
+
+{% block body %}
+  {% if docentes %}
+      <div class="card">
+          <div class="card-header">
+              <strong class="card-title">Listado de docentes seleccionados<h2>Cantidad de docentes seleccionados:  {{ docentes.count }}  </h2></strong>
+          </div>
+          <div class="table-stats order-table ov-h">
+              <table class="table">
+                  <thead>
+                      <tr>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                          <th>Estado</th>
+                          <th>Estado de selección</th>
+                          <th>Imagen</th>
+                        <th>Opciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    {% for docente in docentes %}
+                      <tr>
+                        <td>{{ docente.nombre}}</td>
+                        <td>{{ docente.apellidos}}</td>
+                        <td>{{ docente.estado}}</td>
+                        <td>{{ docente.estado_seleccion}}</td>
+                        <td>
+                        {%if docente.imagen %}
+                            <img src="{{ docente.imagen.url}}" width="50" height="50">
+                        {% endif %}
+                        </td>
+
+
+
+                        <td>
+                            {% if perms.docente.change_docente %}
+                            <a href="{% url 'editarDocumento' docente.id %}" class="btn btn-warning">Editar</a>
+                            {% endif %}
+                            {% if perms.docente.delete_docente %}
+                            <a href="{% url 'docente:eliminar_docente' docente.id %}" class="btn btn-danger">Eliminar</a>
+                            {% endif %}
+                            <a href="{% url 'workflowDocente' docente.id %}" class="btn btn-dark">Workflow</a>
+                            {% if perms.docente.view_docente %}
+                            <a href="{% url 'consultarDocumento' docente.id %}" class="btn btn-info">Consultar</a>
+                            {% endif %}
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      {% else %}
+        <h1>No existen autores registrados</h1>
+      {% endif %}
+<div class="modal fade" id="creacion" role="dialog">
+
+</div>
+
+<div class="modal fade" id="edicion" role="dialog">
+
+</div>
+
+{% endblock body %}
+{% block extrajs %}
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  function abrir_modal_edicion(url) {
+    $('#edicion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+  function abrir_modal_creacion(url) {
+    $('#creacion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+</script>
+{% endblock extrajs %}
+

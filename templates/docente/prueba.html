@@ -1,0 +1,16 @@
+{% block titulo %}
+    Prueba de docentes
+{% endblock titulo %}
+{% block body %}
+<form method="POST" enctype="multipart/form/data">
+    {% csrf_token %}
+    {% if error %}
+    <h2>{{ error }}</h2>
+    {% else %}
+    {{ consulta_form.as_p }}
+    <button type="submit">Prueba</button>
+    {% endif %}
+
+</form>
+
+{% endblock body %}

@@ -1,0 +1,77 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block titulo %}
+  Biblioteca.dev | Listado de Autores
+{% endblock titulo %}
+
+{% block body %}
+  {% if cursantes %}
+      <div class="card">
+          <div class="card-header" style="background-image: url({% static 'images/amarillo.jpg' %});'">
+              <strong class="card-title"><h3>Listado de cursantes con documentación para revisar</h3> <h1>Cantidad de cursantes:  {{ cursantes.count }}  </h1></strong>
+              <img src="{% static 'images/logEMI.png' %}" width="150" height="50">
+          </div>
+          <div class="table-stats order-table ov-h" >
+              <table class="table">
+                  <thead>
+                      <tr>
+                        <th style="background-image: url({% static 'images/azul.jpg' %});'"><h4 class="headings">nombres</h4></th>
+                        <th style="background-image: url({% static 'images/azul.jpg' %});'"><h4 class="headings">Apellidos</h4></th>
+                          <th style="background-image: url({% static 'images/azul.jpg' %});'"><h4 class="headings">Estado</h4></th>
+                          <th style="background-image: url({% static 'images/azul.jpg' %});'"><h4 class="headings">Imagen</h4></th>
+                        <th style="background-image: url({% static 'images/azul.jpg' %});'"><h4 class="headings">Opciones</h4></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    {% for Cursante in cursantes %}
+                      <tr>
+                          <td style="background-image: url({% static 'images/amarillo.jpg' %});'"><h4>{{ Cursante.nombre}}</h4></td>
+                          <td style="background-image: url({% static 'images/amarillo.jpg' %});'"><h4>{{ Cursante.apellidos}}</h4></td>
+                          <td style="background-image: url({% static 'images/amarillo.jpg' %});'"><h4>{{ Cursante.estado}}</h4></td>
+                        <td style="background-image: url({% static 'images/amarillo.jpg' %});'">
+                        {%if Cursante.imagen %}
+                            <img src="{{ Cursante.imagen.url}}" width="50" height="50">
+                        {% endif %}
+                        </td>
+                          <td style="background-image: url({% static 'images/azul.jpg' %});'">
+                              <a href="{% url 'editarCursante' Cursante.id %}" class="btn btn-primary">Editar</a>
+                            <a href="{% url 'docente:eliminar_docente' Cursante.id %}" class="btn btn-danger">Eliminar</a>
+                            <a href="{% url 'consultarDocumentoCursante' Cursante.id %}" class="btn btn-success">Revisar</a>
+                            <a href="{% url 'workflowCursante1' Cursante.id %}" class="btn btn-dark">Workflow</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      {% else %}
+        <h1>No existen cursantes observados</h1>
+      {% endif %}
+<div class="modal fade" id="creacion" role="dialog">
+
+</div>
+
+<div class="modal fade" id="edicion" role="dialog">
+
+</div>
+
+{% endblock body %}
+{% block extrajs %}
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  function abrir_modal_edicion(url) {
+    $('#edicion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+  function abrir_modal_creacion(url) {
+    $('#creacion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+</script>
+{% endblock extrajs %}
+

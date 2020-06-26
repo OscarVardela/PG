@@ -1,0 +1,18 @@
+{% load static %}
+
+{% block titulo %}
+    Creación de docentes
+{% endblock titulo %}
+{% block body %}
+<form method="POST" enctype="multipart/form/data">
+    {% csrf_token %}
+    {% if error %}
+    <h2>{{ error }}</h2>
+    {% else %}
+    {{ docente_form.as_p }}
+    <button type="submit">Creación</button>
+    {% endif %}
+
+</form>
+
+{% endblock body %}

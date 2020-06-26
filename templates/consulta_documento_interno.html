@@ -1,0 +1,73 @@
+{% extends 'index.html' %}
+
+{% block titulo %}
+  Biblioteca.dev | Listado de Autores
+{% endblock titulo %}
+
+{% block body %}
+
+
+      <div class="card">
+          <div class="card-header">
+              <strong class="card-title">Revisión de documentación interna <h1>Titlo del documento interno: {{docente.nombre}}  </h1></strong>
+          </div>
+          <div class="table-stats order-table ov-h">
+              <table class="table">
+                  <tbody>
+
+                    <form method="POST">
+                            {% csrf_token %}
+                            <h2>'</h2>
+                            <h2>Detalle del documento: {{docente.detalle}} </h2>
+                            <h2>Remitente: {{docente.remitente}} </h2>
+                            <h2>Fecha de creación: {{docente.fecha}} </h2>
+                            <h2>Fecha de recepción {{docente.fecha_recepcion}}</h2>
+                            <h2>Receptor: {{docente.receptor}} </h2>
+                            <h2>Area: {{docente.area}} </h2>
+                            <h2>Estado de la documentación: {{docente.estado}} </h2>
+
+                            <div>
+
+                                <center>
+                                    {% if not docente.documento %}
+                                    <h1>No se adjunto titulo de diplomado</h1>
+                                    {% else %}
+                                    <label>Imagen</label>
+                                    <div><img src="/fotos/{{ docente.documento }}"  height="700" width="700"></div>
+                                    {% endif %}
+                                    </center>
+                            </div>
+                            <button type="submit" class="btn btn-success">Recibido</button>
+
+                        </form>
+                  </tbody>
+              </table>
+
+          </div>
+      </div>
+
+<div class="modal fade" id="creacion" role="dialog">
+
+</div>
+
+<div class="modal fade" id="edicion" role="dialog">
+
+</div>
+
+{% endblock body %}
+{% block extrajs %}
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  function abrir_modal_edicion(url) {
+    $('#edicion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+  function abrir_modal_creacion(url) {
+    $('#creacion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+</script>
+{% endblock extrajs %}
+

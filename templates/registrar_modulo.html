@@ -1,0 +1,66 @@
+
+
+
+{% extends 'index.html' %}
+
+{% block titulo %}
+  Biblioteca.dev | Listado de Autores
+{% endblock titulo %}
+
+{% block body %}
+  <form  role="form"  enctype="multipart/form-data" action="" method="POST" id="upload-image-form">
+                                {% csrf_token %}
+                            <div>
+                                <div>
+                                <label>Nombre de módulo</label>
+                                </div>
+                                {{ form.nombre }}
+                            </div>
+
+                            <div>
+                                <label>Programa asignado</label>
+                            </div>
+                            {{ form.id_programas }}
+
+                            <div>
+                                <label>Horas asignadas al módulo</label>
+                            </div>
+                            {{ form.horas }}
+
+                            <div>
+                                <label>Opciones disponibles</label>
+                            </div>
+                            <center>
+                                <button type="submit" class="btn btn-success">Registro</button><a href="{% url 'listarPrograma' %}" class="btn btn-warning">Cancelar</a>
+                            </center>
+                        </form>
+<div class="modal fade" id="creacion" role="dialog">
+
+</div>
+
+<div class="modal fade" id="edicion" role="dialog">
+
+</div>
+
+{% endblock body %}
+{% block extrajs %}
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  function abrir_modal_edicion(url) {
+    $('#edicion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+  function abrir_modal_creacion(url) {
+    $('#creacion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+</script>
+{% endblock extrajs %}
+
+
+
+
+
+

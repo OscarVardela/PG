@@ -1,0 +1,11 @@
+
+{% load qr_code %}
+<h3>Add contact '{{ contact_detail.first_name }} {{ contact_detail.last_name }}' to phone book</h3>
+{% qr_for_contact contact_detail=contact_detail size='S' %}
+<p>or:</p>
+{% qr_for_contact contact_detail size='S' %}
+<p>or:</p>
+{% qr_for_contact contact_detail options=options_example %}
+
+<h1>Prueba</h1>
+<img src="{{ event.qrcode.url }}" alt="Event QR code" />

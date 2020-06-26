@@ -1,0 +1,62 @@
+
+{% load django_qr_creator %}
+
+{% block titulo %}
+
+    <h1>
+        <center>Listado de documentos</center>
+    </h1>
+
+{% endblock titulo %}
+
+
+{% block body %}
+
+    {% if docentes %}
+        <table>
+            <thead>
+            <tr>
+
+                <th>nombres</th>
+                <th>Apellidos</th>
+                <th>Sexo</th>
+                <td>Correo</td>
+                <td>Nacionalidad</td>
+                <td>Imagen</td>
+                <td>Detalle</td>
+                <td>Codigos</td>
+                <th>Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for docente in docentes%}
+                    <tr>
+
+
+                        <td>{{ docente.nombre}}</td>
+                        <td>{{ docente.apellidos}}</td>
+                        <td>{{ docente.sexo}}</td>
+                        <td>{{ docente.correo}}</td>
+                        <td>{{ docente.nacionalidad}}</td>
+                        <td>
+                        {%if docente.imagen %}
+                            <img src="{{ docente.imagen.url}}" width="200" height="200">
+                        {% endif %}
+                        </td>
+                        <td>{{ docente.imagen}}</td>
+                        <!--<td>{% qr email=docente.codigoS %}</td>     Para listar con el qr mas-->
+                        <td>{{ docente.codigoS}}</td>
+                        <td>
+                            <a href="{% url 'docente:editar_docente' docente.id %}">Editar</a>
+                            <a href="{% url 'docente:eliminar_docente' docente.id %}">Eliminar</a>
+                            <a href="{% url 'docente:consultar_docente' docente.id %}">Consultar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h1>No existen docentes registrados</h1>
+    {% endif %}
+
+{% endblock body %}

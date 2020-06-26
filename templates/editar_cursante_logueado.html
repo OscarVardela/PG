@@ -1,0 +1,43 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block titulo %}
+  Biblioteca.dev | Listado de Autores
+{% endblock titulo %}
+{% block fondo %}
+style="background-image: url({% static 'images/azul.jpg' %});' "
+{% endblock fondo %}
+
+
+{% block body %}
+<div>
+
+                        <form class="text-light"  role="form"  enctype="multipart/form-data" action="" method="POST" id="upload-image-form">{% csrf_token %}
+                            <table>
+                                <center><h2 class="headings">Menú de modificación de documentos observados del cursante</h2></center>
+
+                                {{ form }}
+                                <tr colspan=2>
+                                    </tr>
+                        </table>
+                        <button class="btn btn-success" type="submit">Registrar</button>
+                        </form>
+</div>
+{% endblock body %}
+{% block extrajs %}
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  function abrir_modal_edicion(url) {
+    $('#edicion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+  function abrir_modal_creacion(url) {
+    $('#creacion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+</script>
+{% endblock extrajs %}
+

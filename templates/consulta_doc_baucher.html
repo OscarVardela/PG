@@ -1,0 +1,89 @@
+{% extends 'index.html' %}
+
+{% block titulo %}
+  Biblioteca.dev | Listado de Autores
+{% endblock titulo %}
+
+{% block body %}
+
+
+      <div class="card">
+          <div class="card-header">
+              <strong class="card-title">Revisión de documento de cursante <h1>Cursante {{docente.nombre}} {{docente.apellidos}}  </h1></strong>
+          </div>
+          <div class="table-stats order-table ov-h">
+              <table class="table">
+                  <tbody>
+
+
+                    <form method="POST">
+                            {% csrf_token %}
+                            <h2>'</h2>
+                            <h2>Fecha de envio de documentos: {{docente.fecha_de_envio}} </h2>
+                            <h2>Teléfono {{docente.telefono}} </h2>
+                            <h2>Nº de cédula de identidad: {{docente.ci}} </h2>
+                            <h2>Sexo: {{docente.sexo}}</h2>
+                            <h2>Fuerza {{docente.fuerza}} </h2>
+                            <h2>Correo: {{docente.correo}} </h2>
+                            <h2>Nacionalidad: {{docente.nacionalidad}} </h2>
+                            <h2>Estado de la documentación: {{docente.estado}} </h2>
+                            <h2>Código secreto: {{docente.codigoS}} </h2>
+
+                            <div>
+                                <center>
+                                    {% if not docente.imagen %}
+                                    <h1>No se adjunto titulo de diplomado</h1>
+                                    {% else %}
+                                    <label>Imagen</label>
+                                    <div><img src="/fotos/{{ docente.imagen }}"  height="200" width="200"></div>
+                                    {% endif %}
+
+
+                                    {% if not docente.comprobante %}
+                                    <h1>No se adjunto titulo de comprobante de pago.</h1>
+                                    {% else %}
+                                    <h2>Comprobante de pago</h2>
+                                    <embed src="/fotos/{{ docente.comprobante }}" height="900" width="700">
+                                    {% endif %}
+
+                                    </center>
+
+                            </div>
+                            <button type="submit" class="btn btn-success">Aprobado</button>
+                            <a href="{% url 'editarCursante' docente.id %}" class="btn btn-danger">Observar</a>
+                            <a href="{% url 'correo' docente.id %}" class="btn btn-warning">Enviar Correo</a>
+                            <a href="{% url 'listarTodoCursante' %}" class="btn btn-info">Cancelar</a>
+                        </form>
+
+
+                  </tbody>
+              </table>
+
+          </div>
+      </div>
+
+<div class="modal fade" id="creacion" role="dialog">
+
+</div>
+
+<div class="modal fade" id="edicion" role="dialog">
+
+</div>
+
+{% endblock body %}
+{% block extrajs %}
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  function abrir_modal_edicion(url) {
+    $('#edicion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+  function abrir_modal_creacion(url) {
+    $('#creacion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+</script>
+{% endblock extrajs %}
+

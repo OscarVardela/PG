@@ -1,0 +1,37 @@
+{% extends 'listar_modulo.html' %}
+
+{% block body %}
+<select>
+    <option>Elige</option>
+    {% for modulo in modulos %}
+        <option value="{{modulo.id}}">{{modulo.nombre}}</option>
+    {% endfor %}
+    </select>
+    <div id="datos">
+        <h1>sdasd</h1>
+    </div>
+
+
+{% endblock %}
+
+{% block extrajs %}
+<script>
+    $('select').on('change',inicio);
+
+    function inicio(){
+        var id = $(this).val();
+        $.ajax({
+            data : {'id':id},
+            url: "/docente/busqueda_ajax/",
+            type : 'get',
+            success : function(data){
+                var html = ""
+                for(var i = 0; i<data.length ; i++){
+                    html +='<ul><li>'+data[i].fields.nombre+'</li></ul>'
+                }
+                $('#datos').html(html);
+            }
+        });
+    }
+</script>
+{% endblock %}

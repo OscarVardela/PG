@@ -1,0 +1,114 @@
+{% extends 'index.html' %}
+
+{% block titulo %}
+  Biblioteca.dev | Listado de Autores
+{% endblock titulo %}
+
+{% block body %}
+
+
+      <div class="card">
+          <div class="card-header">
+              <strong class="card-title">Revisión de documento de docente <h1>Cursante {{docente.nombre}} {{docente.apellidos}}  </h1></strong>
+          </div>
+          <div class="table-stats order-table ov-h">
+              <table class="table">
+                  <tbody>
+
+                    <form method="POST">
+                            {% csrf_token %}
+                            <h2>'</h2>
+                            <h2>Cédula de identidad: {{docente.ci}} </h2>
+                            <h2>Teléfono / Celular: {{docente.telefono}} </h2>
+                            <h2>Correo: {{docente.correo}} </h2>
+                            <h2>Sexo {{docente.sexo}}</h2>
+                            <h2>Fuerza: {{docente.fuerza}} </h2>
+                            <h2>Nacionalidad: {{docente.nacionalidad}} </h2>
+                            <h2>Estado de la documentación: {{docente.estado}} </h2>
+                            <h2>Código Secreto: {{docente.codigoS}} </h2>
+                            <h2>Estado de selección: {{docente.estado_seleccion}} </h2>
+
+                            <div>
+
+                                <center>
+                                    {% if not docente.imagen %}
+                                    <h1>No se adjunto titulo de diplomado</h1>
+                                    {% else %}
+                                    <label>Imagen</label>
+                                    <div><img src="/fotos/{{ docente.imagen }}"  height="200" width="200"></div>
+                                    {% endif %}
+
+                                    <h1>curriculum:</h1>
+                                    <div><img src="/fotos/{{ docente.curriculum }}"  height="700" width="700"></div>
+
+                                    {% if not docente.titulo %}
+                                    <h1>No se adjunto titulo.</h1>
+                                    {% else %}
+                                    <h1>Título en provision nacional o su equivalente:</h1>
+                                    <div><img src="/fotos/{{ docente.titulo }}"  height="700" width="500"></div>
+                                    {% endif %}
+
+                                    {% if not docente.diplomado %}
+                                    <h1>No se adjunto diplomado.</h1>
+                                    {% else %}
+                                    <h1>Título de diplomado</h1>
+                                    <embed src="/fotos/{{ docente.diplomado }}" height="700" width="500">
+                                    {% endif %}
+                                    {% if not docente.maestria %}
+                                    <h1>No se adjunto titulo de maestria.</h1>
+                                    {% else %}
+                                    <h2>Titulo de maestria</h2>
+                                    <embed src="/fotos/{{ docente.maestria }}" height="900" width="700">
+                                    {% endif %}
+                                    {% if not docente.doctorado %}
+                                    <h1>No se adjunto titulo de doctorado.</h1>
+                                    {% else %}
+                                    <h2>Titulo de doctorado</h2>
+                                    <embed src="/fotos/{{ docente.doctorado }}" height="900" width="700">
+                                    {% endif %}
+                                    {% if not docente.posdoctorado %}
+                                    <h1>No se adjunto titulo de posdoctorado.</h1>
+                                    {% else %}
+                                    <h2>Titulo de posdoctorado</h2>
+                                    <embed src="/fotos/{{ docente.posdoctorado }}" height="900" width="700">
+                                    {% endif %}
+                                    </center>
+                            </div>
+                            <button type="submit" class="btn btn-success">Aprobado</button>
+                            <a href="{% url 'docenteDescartar' docente.id %}" class="btn btn-info">Descartar Docente</a>
+                            <a href="{% url 'editarDocenteEstados' docente.id %}" class="btn btn-primary">Especificar documentos observados</a>
+                            <a href="{% url 'correodocente' docente.id %}" class="btn btn-danger">Enviar Correo</a>
+                            <a href="{% url 'listarTodo' %}" class="btn btn-basic">Cancelar</a>
+
+                        </form>
+                  </tbody>
+              </table>
+
+          </div>
+      </div>
+
+<div class="modal fade" id="creacion" role="dialog">
+
+</div>
+
+<div class="modal fade" id="edicion" role="dialog">
+
+</div>
+
+{% endblock body %}
+{% block extrajs %}
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  function abrir_modal_edicion(url) {
+    $('#edicion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+  function abrir_modal_creacion(url) {
+    $('#creacion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+</script>
+{% endblock extrajs %}
+

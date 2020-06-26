@@ -1,0 +1,48 @@
+{% l
+
+
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block titulo %}
+  Biblioteca.dev | Listado de Autores
+{% endblock titulo %}
+
+{% block body %}
+<div class="col-md-12 prueba ">
+                            <div class="card bg-dark">
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0 text-light text-center">
+                                        {% if request.user.usuario_tipo == 'DOCENTE' %}
+                                        <h5 class="text-light"> {{ user.nombres | upper }}  para hacer oficial su postulacion
+                                            usted debe tener en cuenta que para impartir asignaturas en los diferntes programa
+                                            de posgrado, usted debe ser profesional egresado de una universidad del sistema,
+                                            titulo a nivel licenciatura como requisitos fundamentales
+                                            <a href="https://www.emi.edu.bo/emi/normativa-interna.html"> Puede ver los requisitos pulsado aquí</a></h5>
+
+                                        <a href="{% url 'EncuestaNegativaCursante' %}" class="btn btn-danger">No cuento con los requisitos</a>
+                                        &nbsp;<a href="{% url 'registroDelDocente' %}" class="btn btn-primary">Cuento con los requisitos</a>
+                                        {% endif %}
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+
+{% endblock body %}
+{% block extrajs %}
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  function abrir_modal_edicion(url) {
+    $('#edicion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+  function abrir_modal_creacion(url) {
+    $('#creacion').load(url, function () {
+      $(this).modal('show');
+    });
+  }
+</script>
+{% endblock extrajs %}
+

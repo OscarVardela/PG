@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+{% block titulo %}
+    Eliminacion de docentes
+{% endblock titulo %}
+{% block body %}
+<form method="POST">
+    {% csrf_token %}
+    <h2>Desea eliminar el registro de {{docente.nombre}} {{docente.apellidos}}</h2>
+    <button type="submit">Eliminar</button>
+    <a href="{% url 'docente:listar_docente' %}">Cancelar</a>
+</form>
+
+{% endblock body %}

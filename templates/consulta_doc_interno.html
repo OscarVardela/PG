@@ -1,0 +1,362 @@
+{% load static%}
+{% load imagekit %}
+{% load django_qr_creator %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Lawyer HTML-5 Template</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="manifest" href="site.webmanifest">
+		<link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
+
+		<!-- CSS here -->
+            <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/slicknav.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/fontawesome-all.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
+   </head>
+
+   <body>
+
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="{% static 'assets/img/logo/loder.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+
+    <header>
+        <!-- Header Start -->
+       <div class="header-area header-sticky">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <!-- Logo -->
+                    <div class="col-xl-2 col-lg-1 col-md-1">
+                        <div class="logo">
+                        <a href="index.html"><img src="{% static 'assets/img/logo/psg.jpg' %}" alt=""></a>
+                        </div>
+                        <div><li><a href="#">Bienvenido, {{ user.username }}</a></li></div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-3">
+                        <!-- Header-btn -->
+                        <div class="header-btn d-none d-lg-block f-right">
+                            <a href="{% url 'logout' %}" class="btn header-btn">Cerrar Sesión</a>
+                        </div>
+                    </div>
+                    <!-- Mobile Menu -->
+                    <div class="col-12">
+                        <div class="mobile_menu d-block d-lg-none"></div>
+                    </div>
+                </div>
+            </div>
+       </div>
+        <!-- Header End -->
+        <style>.red-text {
+          color: red;
+         }
+        </style>
+        <style>.green-text {
+          color: green;
+         }
+        </style>
+
+
+        <style>
+div.a {
+  position: relative;
+  width: 1200px;
+  height: 400px;
+  border: 3px solid white;
+}
+
+div.b {
+  position: absolute;
+  right: 0;
+  width: 500px;
+  height: 320px;
+  border:
+}
+
+div.c {
+  position: absolute;
+  right: 650px;
+  width: 500px;
+  height: 320px;
+  border:
+}
+
+div.d {
+  position: absolute;
+  right: 650px;
+  width: 150px;
+  height: 120px;
+  border: 3px solid white;
+}
+</style>
+
+
+        <!-- Team Mates Start -->
+        <div class="teams-area section-padding30">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-xl-12">
+                        <div class="section-tittle section-tittle-f text-center mb-70">
+                            <h2>Workflow de documento interno</h2>
+                        </div>
+                    </div>
+                </div>
+                <form method="POST">
+            {% csrf_token %}
+
+        <div class="a">Flujo de trabajo de documentación interna
+            <div class="b"><h5><strong>Área de destino de documentación:</strong></h5> <h4>{{docente.area}}
+                            {% if docente.area == "COORDINADOR GENERAL" %}
+                                <a href="index.html"><img src="{% static 'assets/img/coordinador.jpg' %}" alt=""></a>
+                            {% endif %}
+                            {% if docente.area == "DIRECTOR" %}
+                                <a href="index.html"><img src="{% static 'assets/img/admin.png' %}" alt=""></a></h4>
+                            {% endif %}
+                            {% if docente.area == "SECRETARIA" %}
+                                <a href="index.html"><img src="{% static 'assets/img/secretaria.png' %}" alt=""></a></h4>
+                            {% endif %}
+                            {% if docente.area == "ENCARGADA DE FINANZAS" %}
+                                <a href="index.html"><img src="{% static 'assets/img/finanzas.png' %}" alt=""></a></h4>
+                            {% endif %}
+                            {% if docente.area == "ENCARGADA DE PLATAFORMA" %}
+                                <a href="index.html"><img src="{% static 'assets/img/encargada.png' %}" alt=""></a></h4>
+                            {% endif %}
+
+                            <h6>Fecha de revisión del documento:</h6>
+                                {% if docente.fecha_recepcion == None %}
+                                <h6 class="red-text">La documentación aún no fue revisada</h6>
+                                {% else %}
+                                <h4>{{docente.fecha_recepcion}}</h4>
+                                {% endif %}
+                            <h6>Historial de usuarios que intervinieron en el documento:</h6> <h4>{{docente.receptor}}</h4></div>
+  <div class="d"><a href="index.html"><img src="{% static 'assets/img/flecha.png' %}" alt=""></a> </h6></div>
+
+  <div class="c"><h5>Emisor de documento  </h5> <h3>{{docente.remitente}}
+                            {% if docente.remitente == "coordinador" %}
+                                <a href="index.html"><img src="{% static 'assets/img/coordinador.jpg' %}" alt=""></a>
+                            {% endif %}
+                            {% if docente.remitente == "admin" %}
+                                <a href="index.html"><img src="{% static 'assets/img/admin.png' %}" alt=""></a></h3>
+                            {% endif %}
+                            <h6>Nombre del documento interno: </h6><h6 class="green-text"><strong>{{docente.nombre}}</strong></h6>
+                            <h6>Fecha de creación de documento:</h6> <h4> {{docente.fecha}}</h4>
+
+                            <h6>Estado actual de la documentación: </h6>
+                            {% if docente.estado == "ACTIVO" %}
+                            <h6 class="red-text"> Documentacion para revisar
+                                <a href="index.html"><img src="{% static 'assets/img/wrong.png' %}" alt=""></a>
+                            {% endif %}
+                            {% if docente.estado == "ARCHIVADO" %}
+                            <h6 class="green-text"> {{docente.estado}}
+                                <a href="index.html"><img src="{% static 'assets/img/favicon.ico' %}" alt=""></a> </h6>
+                            {% endif %}</div>
+
+        </div>
+
+                            <td>{% qr sms=user.username message=docente.codigoS %}</td>
+                            <a href="{% url 'docente:listar_docente' %}">Cancelar</a>
+                                <label><strong>Documento Adjunto</strong></label>
+                            <div>
+                                <center>
+                                    <embed src="/fotos/{{ docente.documento }}" height="900" width="700">
+                                </center>
+                            </div>
+
+                            <!--<img src="{% static 'img/1.jpg' %}" class="img-fluid">
+                            <img src="{% static 'img/2.jpg' %}" class="img-fluid">
+                            <img src="{% static 'img/3.jpg' %}" class="img-fluid">-->
+                        </form>
+                </div>
+            </div>
+        </div>
+        <!-- Team Mates End-->
+
+        <!-- Want To Work Start -->
+        <div class="wantToWork-area w-padding">
+            <div class="container">
+                <div class="row d-flex align-items-center">
+                    <div class="col-xl-7 col-lg-9 col-md-8">
+                        <div class="wantToWork-caption">
+                            <h2>Get Your Answer In Just 5 Minutes</h2>
+                            <p>Checking your loan options does not affect your credit score!s</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-lg-3 col-md-4">
+                       <div class="wantToWork-btn f-right">
+                            <a href="#" class="btn btn-ans">Get started <i class="ti-angle-double-right"></i></a>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Want To Work End -->
+
+    </main>
+   <footer>
+       <!-- Footer Start-->
+       <div class="footer-area footer-bg footer-padding">
+           <div class="container">
+               <div class="row d-flex justify-content-between">
+                   <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
+                      <div class="single-footer-caption mb-50">
+                        <!-- logo -->
+                        <div class="footer-logo">
+                        <a href="index.html"><img src="{% static '' %}assets/img/logo/logo.png" alt=""></a>
+                        </div>
+                        <div class="single-footer-caption mb-30">
+                            <div class="footer-tittle">
+                                <div class="footer-pera">
+                                    <p>Seddo eiusmod tempor incididunt ut labore et dolore magna aliqua. consectetur pisicin elit, sed do eiusmod tempor.</p>
+                               </div>
+                            </div>
+                        </div>
+                        <!-- footer social -->
+                        <div class="footer-social">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-globe"></i></a>
+                            <a href="#"><i class="fab fa-behance"></i></a>
+                        </div>
+                      </div>
+                   </div>
+                   <div class="col-xl-2 col-lg-2 col-md-2 col-sm-5">
+                       <div class="single-footer-caption mb-50">
+                           <div class="footer-tittle">
+                               <h4>Company</h4>
+                               <ul>
+                                   <li><a href="index.html">Home</a></li>
+                                   <li><a href="about.html"> About Us</a></li>
+                                   <li><a href="#">Browse Pets</a></li>
+                                   <li><a href="blog.html">Blog</a></li>
+                                   <li><a href="contact.html">Contact Us</a></li>
+                               </ul>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5">
+                       <div class="single-footer-caption mb-50">
+                           <div class="footer-tittle">
+                               <h4>Services</h4>
+                               <ul>
+                                   <li><a href="#">O’Connor Group</a></li>
+                                   <li><a href="#">Our Business Model</a></li>
+                                   <li><a href="#">Our Lawyers Team</a></li>
+                                   <li><a href="#"> Most Recent Cases</a></li>
+                                   <li><a href="#"> Hot Lawyers News</a></li>
+                               </ul>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-xl-4 col-lg-4 col-md-5 col-sm-5">
+                       <div class="single-footer-caption mb-50">
+                           <div class="footer-tittle">
+                               <h4>Newsletter</h4>
+                               <div class="footer-pera footer-pera2">
+                                <p>For Lastest update Sign up here</p>
+                            </div>
+                            <!-- Form -->
+                            <div class="footer-form" >
+                                <div id="mc_embed_signup">
+                                    <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                                    method="get" class="subscribe_form relative mail_part">
+                                        <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
+                                        class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
+                                        onblur="this.placeholder = ' Email Address '">
+                                        <div class="submit-btn">
+                                            <button type="submit" name="submit" id="newsletter-submit"
+                                            class="email_icon newsletter-submit button-contactForm">
+
+                                            Subscribe <i class="ti-angle-double-right"></i></button>
+                                        </div>
+                                        <div class="mt-10 info"></div>
+                                    </form>
+                                </div>
+                            </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+       <!-- footer-bottom aera -->
+       <div class="footer-bottom-area footer-bg">
+           <div class="container">
+               <div class="footer-border">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-xl-12">
+                            <div class="footer-copy-right text-center">
+                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+           </div>
+       </div>
+       <!-- Footer End-->
+   </footer>
+
+	<!-- JS here -->
+
+		<!-- All JS Custom Plugins Link Here here -->
+        <script src="{% static '' %}./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+		<!-- Jquery, Popper, Bootstrap -->
+		<script src="{% static '' %}./assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="{% static '' %}./assets/js/popper.min.js"></script>
+        <script src="{% static '' %}./assets/js/bootstrap.min.js"></script>
+	    <!-- Jquery Mobile Menu -->
+        <script src="{% static '' %}./assets/js/jquery.slicknav.min.js"></script>
+
+		<!-- Jquery Slick , Owl-Carousel Plugins -->
+        <script src="{% static '' %}./assets/js/owl.carousel.min.js"></script>
+        <script src="{% static '' %}./assets/js/slick.min.js"></script>
+
+		<!-- One Page, Animated-HeadLin -->
+        <script src="{% static '' %}./assets/js/wow.min.js"></script>
+		<script src="{% static '' %}./assets/js/animated.headline.js"></script>
+        <script src="{% static '' %}./assets/js/jquery.magnific-popup.js"></script>
+
+		<!-- Scrollup, nice-select, sticky -->
+        <script src="{% static '' %}./assets/js/jquery.scrollUp.min.js"></script>
+        <script src="{% static '' %}./assets/js/jquery.nice-select.min.js"></script>
+		<script src="{% static '' %}./assets/js/jquery.sticky.js"></script>
+
+        <!-- counter , waypoint -->
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+        <script src="{% static '' %}./assets/js/jquery.counterup.min.js"></script>
+
+        <!-- counter -->
+        <script src="{% static '' %}./assets/js/contact.js"></script>
+        <script src="{% static '' %}./assets/js/jquery.form.js"></script>
+        <script src="{% static '' %}./assets/js/jquery.validate.min.js"></script>
+        <script src="{% static '' %}./assets/js/mail-script.js"></script>
+        <script src="{% static '' %}./assets/js/jquery.ajaxchimp.min.js"></script>
+
+		<!-- Jquery Plugins, main Jquery -->
+        <script src="{% static '' %}./assets/js/plugins.js"></script>
+        <script src="{% static '' %}./assets/js/main.js"></script>
+
+    </body>
+</html>

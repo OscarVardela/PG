@@ -1,0 +1,246 @@
+{% load static%}
+{% load imagekit %}
+{% load django_qr_creator %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Lawyer HTML-5 Template</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="manifest" href="site.webmanifest">
+		<link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
+
+		<!-- CSS here -->
+            <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/slicknav.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/fontawesome-all.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
+   </head>
+
+   <body>
+
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="{% static 'assets/img/logo/loder.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+
+    <header>
+        <!-- Header Start -->
+       <div class="header-area header-sticky">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <!-- Logo -->
+                    <div class="col-xl-2 col-lg-1 col-md-1">
+                        <div class="logo">
+                        <a href="index.html"><img src="{% static 'assets/img/logo/psg.jpg' %}" alt=""></a>
+                        </div>
+                        <div><li><a href="#">Bienvenido, {{ user.username }}</a></li></div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-3">
+                        <!-- Header-btn -->
+                        <div class="header-btn d-none d-lg-block f-right">
+                            <a href="{% url 'logout' %}" class="btn header-btn">Cerrar Sesión</a>
+                        </div>
+                    </div>
+                    <!-- Mobile Menu -->
+                    <div class="col-12">
+                        <div class="mobile_menu d-block d-lg-none"></div>
+                    </div>
+                </div>
+            </div>
+       </div>
+        <!-- Header End -->
+        <style>.red-text {
+          color: red;
+         }
+        </style>
+        <style>.green-text {
+          color: green;
+         }
+        </style>
+        <style>.orange-text {
+          color: orange;
+         }
+        </style>
+
+        <style>
+div.a {
+  position: relative;
+  width: 1200px;
+  height: 400px;
+  border: 3px solid white;
+}
+
+div.b {
+  position: absolute;
+  right: 0;
+  width: 500px;
+  height: 320px;
+  border:
+}
+
+div.c {
+  position: absolute;
+  right: 650px;
+  width: 500px;
+  height: 320px;
+  border:
+}
+
+div.d {
+  position: absolute;
+  right: 650px;
+  width: 150px;
+  height: 120px;
+  border: 3px solid white;
+}
+</style>
+
+
+        <!-- Team Mates Start -->
+        <div class="teams-area section-padding30">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-xl-12">
+                        <div class="section-tittle section-tittle-f text-center mb-70">
+                            <h2>Workflow de documento interno</h2>
+                        </div>
+                    </div>
+                </div>
+                <form method="POST">
+            {% csrf_token %}
+
+        <div class="a">Flujo de trabajo de documentación de cursante
+            <div class="b"><h5><strong>RECEPCIÓN DE LA DOCUMENTACIÓN:</strong></h5>
+                            <h6>Revisado última vez por: </h6>
+                            {% if docente.bitacora == "admin" %}
+                                <h4 >{{docente.bitacora}}
+                                    <a href="index.html"><img src="{% static 'assets/img/admin.png' %}" alt=""></a></h4>
+                            {% endif %}
+                            {% if docente.bitacora == "secretaria" %}
+                                <h4 class="green-text">{{docente.bitacora}}
+                                    <a href="index.html"><img src="{% static 'assets/img/secretaria.png' %}" alt=""></a></h4>
+                            {% endif %}
+                            {% if docente.estado == "PARA REVISAR" %}
+                                <h4 class="red-text">{{docente.estado}}
+                                    <a href="index.html"><img src="{% static 'assets/img/wrong.png' %}" alt=""></a></h4>
+                            {% endif %}
+                            {% if docente.estado == "APROBADO PARCIALMENTE" %}
+                                <h4 class="orange-text">{{docente.estado}}
+                                <a href="index.html"><img src="{% static 'assets/img/interrogacion.jpg' %}" alt=""></a></h4>
+                            {% endif %}
+                            {% if docente.estado == "APROBADO" %}
+                                <h4>{{docente.estado}}
+                                <a href="index.html"><img src="{% static 'assets/img/favicon.ico' %}" alt=""></a></h4>
+                            {% endif %}
+
+                            <h6>Fecha de revisión del documento:</h6>
+                                {% if docente.fecha_revision == None %}
+                                <h6 class="red-text">La documentación aún no fue revisada</h6>
+                                {% else %}
+                                <h4>{{docente.fecha_revision}}</h4>
+                                {% endif %}
+
+            </div>
+        <div class="d"><a href="index.html"><img src="{% static 'assets/img/flecha.png' %}" alt=""></a> </h6></div>
+
+        <div class="c"><h5>DOCUMENTOS DE CURSANTE  </h5> <h3>{{docente.remitente}}
+                            {% if docente.remitente == "coordinador" %}
+                                <a href="index.html"><img src="{% static 'assets/img/coordinador.jpg' %}" alt=""></a>
+                            {% endif %}
+                            {% if docente.remitente == "admin" %}
+                                <a href="index.html"><img src="{% static 'assets/img/admin.png' %}" alt=""></a></h3>
+                            {% endif %}
+                            <h6>Nombres y apellidos del cursante: </h6><h6 class="green-text"><strong>{{docente.nombre}} {{docente.apellidos}}</strong></h6>
+                            <a href="index.html"><img src="/fotos/{{ docente.imagen }}" height="150" width="150" alt=""></a>
+                            <h6>Fecha de creación de documento:</h6> <h4> {{docente.fecha_de_envio}}</h4>
+                            <h6>Sexo:</h6> <h4> {{docente.sexo}}</h4>
+
+                            <h6>Fuerza:</h6>
+                            {% if docente.fuerza == "CÍVIL" %}
+                            <h6 class="red-text"> {{docente.fuerza}}
+                                <a href="index.html"><img src="{% static 'assets/img/civil.jpg' %}" alt=""></a>
+                            {% endif %}
+                            {% if docente.fuerza == "EJÉCITO" %}
+                            <h6> <strong>Ejército</strong>
+                                <a href="index.html"><img src="{% static 'assets/img/ejercito.jpg' %}" alt=""></a>
+                            {% endif %}
+                                {% if docente.fuerza == "FUERZA AÉREA" %}
+                            <h6> <strong>FUERZA AÉREA</strong>
+                                <a href="index.html"><img src="{% static 'assets/img/fab.jpg' %}" alt=""></a>
+                            {% endif %}
+                            {% if docente.fuerza == "ARMADA" %}
+                            <h6 class="green-text"> {{docente.fuerza}}
+                                <a href="index.html"><img src="{% static 'assets/img/armada.jpg' %}" alt=""></a> </h6>
+                            {% endif %}</div>
+
+        </div>
+
+
+                        </form>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+	<!-- JS here -->
+
+		<!-- All JS Custom Plugins Link Here here -->
+        <script src="{% static '' %}./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+		<!-- Jquery, Popper, Bootstrap -->
+		<script src="{% static '' %}./assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="{% static '' %}./assets/js/popper.min.js"></script>
+        <script src="{% static '' %}./assets/js/bootstrap.min.js"></script>
+	    <!-- Jquery Mobile Menu -->
+        <script src="{% static '' %}./assets/js/jquery.slicknav.min.js"></script>
+
+		<!-- Jquery Slick , Owl-Carousel Plugins -->
+        <script src="{% static '' %}./assets/js/owl.carousel.min.js"></script>
+        <script src="{% static '' %}./assets/js/slick.min.js"></script>
+
+		<!-- One Page, Animated-HeadLin -->
+        <script src="{% static '' %}./assets/js/wow.min.js"></script>
+		<script src="{% static '' %}./assets/js/animated.headline.js"></script>
+        <script src="{% static '' %}./assets/js/jquery.magnific-popup.js"></script>
+
+		<!-- Scrollup, nice-select, sticky -->
+        <script src="{% static '' %}./assets/js/jquery.scrollUp.min.js"></script>
+        <script src="{% static '' %}./assets/js/jquery.nice-select.min.js"></script>
+		<script src="{% static '' %}./assets/js/jquery.sticky.js"></script>
+
+        <!-- counter , waypoint -->
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+        <script src="{% static '' %}./assets/js/jquery.counterup.min.js"></script>
+
+        <!-- counter -->
+        <script src="{% static '' %}./assets/js/contact.js"></script>
+        <script src="{% static '' %}./assets/js/jquery.form.js"></script>
+        <script src="{% static '' %}./assets/js/jquery.validate.min.js"></script>
+        <script src="{% static '' %}./assets/js/mail-script.js"></script>
+        <script src="{% static '' %}./assets/js/jquery.ajaxchimp.min.js"></script>
+
+		<!-- Jquery Plugins, main Jquery -->
+        <script src="{% static '' %}./assets/js/plugins.js"></script>
+        <script src="{% static '' %}./assets/js/main.js"></script>
+
+    </body>
+</html>
